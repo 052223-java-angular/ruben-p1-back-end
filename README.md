@@ -18,13 +18,13 @@ This is a full-stack web application that allows users to browse a catalog of aq
 
 ## MVP (Minimum Viable Product)
 
-- User registration and login
-- Browsing and searching for products
-- Adding products to a shopping cart
-- Modifying the shopping cart
-- Secure payment process
-- Order history
-- Product rating and reviewing
+- User registers and login
+- Browsing Catalog of Fish and Searching methods
+- Adding fish from the catalog to personal fish tank
+- Create user fish tank
+- Modifying the fish tank; add fish, remove fish, filtration
+- Leave review of experience with fish in fish tank, persists to catalog
+- Browse reviews of a fish in catalog, left by existing members
 
 ## Stretch Goals
 
