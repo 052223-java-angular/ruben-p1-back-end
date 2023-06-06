@@ -25,5 +25,4 @@ public class Role {
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<User> users;
-
 }
