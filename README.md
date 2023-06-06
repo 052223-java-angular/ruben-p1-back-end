@@ -1,37 +1,39 @@
-# P1 - Aquatic Fishkeeper
+# P1 - Hyrule Exploria
 
 ## Introduction
 
-This is a full-stack web application that allows users to browse a catalog of aquatic species to simulate their own tank with the purpose to educate and entertain. This is built using HTML, CSS, Typecsript, deployed with SpringBoot and using Angular.
+This is a full-stack web application that allows users to browse a catalog of Hyrule species to add to their own army and learn about them. This is built using HTML, CSS, Typecsript, deployed with SpringBoot and using Angular.
 
 ## User Stories
 
-- **As a user**, I want to register an account so I can browse the fish catalog.
-- **As a user**, I want to log in so I can see my own fish.
-- **As a user**, I want to browse and save fish I own as a logged-in user.
-- **As a user**, I want to browse fish by categories: conservation, family.
-- **As a user**, I want build my own fish tank with fish found in catalog.
-- **As a user**, I want to see other users reviews on a fish to determine interest.
-- **As a user**, I want to learn more about the fish: description, name, statistics.
+- **As a user**, I want to register an account so I can browse Hyrule Bestiary.
+- **As a user**, I want to log in so I can see a list of creatures
+- **As a user**, I want to browse and catalogue creatures of interest for later view.
+- **As a user**, I want to browse fish by categories: species,element, stats.
+- **As a user**, I want build my own army with the creatures logged.
+- **As a user**, I want to see my armies potential power.
+- **As a user**, I want to be able to review my monsters for others to see.
+- **As a user**, I want to see other users reviews on a monster to determine interest.
+- **As a user**, I want to learn more about the monster: description, details.
 
 
 ## MVP (Minimum Viable Product)
 
 - User registers and login
-- Browsing Catalog of Fish and Searching methods
-- Adding fish from the catalog to personal fish tank
-- Create user fish tank
-- Modifying the fish tank; add fish, remove fish
-- Leave review of experience with fish in fish tank, persists to catalog
-- Browse reviews of a fish in catalog, left by existing members
+- Browsing Catalog of Monsters and Searching methods
+- Adding monsters from the catalog to personal army
+- Create user army
+- Modifying the army; add, remove monsters.
+- Leave review of experience with monsters.
+- Browse reviews of a monsters in catalog, left by existing members
+- View other users and their army for battle
+- simulate combat with other users army and yours
 
 ## Stretch Goals
-- View other users and their tank
-- I want to be able to simulate my fish tank using compatible fish.
 - Adding a research feature: additional API
 
 ## API
-- **Fish Species**: https://rapidapi.com/myapos--FqlEzvrlv/api/fish-species
+- **Zelda API**: https://docs.zelda.fanapis.com/docs
 
 ## Tech Stacks
 
