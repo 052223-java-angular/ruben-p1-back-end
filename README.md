@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a full-stack web application that allows users to browse a catalog of aquatic species to simulate their own tank with the purpose to educate and entertain. This is built using HTML, CSS, JavaScript framework Angular using PostMan to communicate with the server.
+This is a full-stack web application that allows users to browse a catalog of aquatic species to simulate their own tank with the purpose to educate and entertain. This is built using HTML, CSS, Typecsript, deployed with SpringBoot and using Angular.
 
 ## User Stories
 
@@ -11,7 +11,7 @@ This is a full-stack web application that allows users to browse a catalog of aq
 - **As a user**, I want to browse and save fish I own as a logged-in user.
 - **As a user**, I want to browse fish by categories: diet, tempermant, other.
 - **As a user**, I want to see if my owned fish are compatible with one another.
-- **As a user**, I want build my own fish tank with saved fish.
+- **As a user**, I want build my own fish tank with fish found in catalog.
 - **As a user**, I want to see other users reviews on a fish to determine interest.
 - **As a user**, I want to learn more about the fish: description, name, statistics.
 
