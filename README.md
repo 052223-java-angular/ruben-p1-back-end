@@ -10,7 +10,6 @@ This is a full-stack web application that allows users to browse a catalog of aq
 - **As a user**, I want to log in so I can see my own fish.
 - **As a user**, I want to browse and save fish I own as a logged-in user.
 - **As a user**, I want to browse fish by categories: conservation, family.
-- **As a user**, I want to see if my owned fish are compatible with one another.
 - **As a user**, I want build my own fish tank with fish found in catalog.
 - **As a user**, I want to see other users reviews on a fish to determine interest.
 - **As a user**, I want to learn more about the fish: description, name, statistics.
