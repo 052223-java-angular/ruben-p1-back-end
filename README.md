@@ -27,7 +27,7 @@ This is a full-stack web application that allows users to browse a catalog of aq
 - Browse reviews of a fish in catalog, left by existing members
 
 ## Stretch Goals
-
+- View other users and their tank
 - I want to be able to simulate my fish tank using compatible fish.
 - Adding a research feature: additional API
 
@@ -37,7 +37,8 @@ This is a full-stack web application that allows users to browse a catalog of aq
 ## Tech Stacks
 
 - **HTML-5**: The main markup language used for building the application.
-- **CSS**: Styling to apply to HTML
+- **Tailwind CSS**: Styling to apply to HTML
+- **Typescript**: Javascript for fullstack development to give page action.
 - **PostgreSQL**: Used as the database to store user, product, and order data.
 - **Maven or Gradle**: Used for managing project dependencies.
 - **JUnit**: A testing framework for Java applications, used to ensure our code works as expected.
