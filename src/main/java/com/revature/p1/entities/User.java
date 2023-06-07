@@ -24,7 +24,7 @@ public class User {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "role_id")
     @JsonBackReference
     private Role role;
 
