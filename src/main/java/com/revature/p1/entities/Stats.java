@@ -14,18 +14,22 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "armies")
-public class Army {
+@Table(name = "statistics")
+public class Stats {
+
     @Id
     private String id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    private String win;
 
-    private String power;
+    private String lose;
 
-    @OneToMany(mappedBy = "army", fetch = FetchType.LAZY)
+    private String kd_ratio;
+
+    @OneToMany(mappedBy = "stats", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private Set<ArmyCreature> armies;
+    private Set<User> users;
+
 
 }
+

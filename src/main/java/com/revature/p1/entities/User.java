@@ -28,5 +28,14 @@ public class User {
     @JsonBackReference
     private Role role;
 
+    @ManyToOne
+    @JoinColumn(name = "stats_id")
+    @JsonBackReference
+    private Stats stats;
+
+    @OneToOne
+    @JoinColumn(name = "army_id", referencedColumnName = "id")
+    private Army army;
+
 
 }

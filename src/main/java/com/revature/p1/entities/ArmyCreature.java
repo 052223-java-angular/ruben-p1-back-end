@@ -28,4 +28,9 @@ public class ArmyCreature{
     @JoinColumn(name = "army_id")
     @JsonBackReference
     private Army army;
+
+    @ManyToOne
+    @JoinColumn(name = "creature_id")
+    @JsonBackReference
+    private Creature creature;
 }
