@@ -12,4 +12,5 @@ public interface UserRepository extends JpaRepository<User, String> { //entity, 
 
     // key! 'findBy' + 'column name'
     Optional<User> findByUsername(String username);
+
 }

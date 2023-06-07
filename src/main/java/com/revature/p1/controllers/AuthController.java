@@ -26,21 +26,22 @@ public class AuthController {
         if (!userService.isUniqueUsername(req.getUsername())) {
             throw new ResourceConflictException("Username is not unique");
         }
-
-        // user name is valid
-
         // check password
+        if (!userService.isValidPassword(req.getPassword())) {
+            throw new ResourceConflictException("Password invalid. 8+ chars, one digit, one upper/lower");
+        }
 
         // check confirmed password with password
-
-
+        if (!userService.checkPasswords(req.getPassword(), req.getConfirmPassword())) {
+            throw new ResourceConflictException("Passwords do not match");
+        }
+        System.out.println("Register user confirmation");
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @ExceptionHandler(ResourceConflictException.class)
     public ResponseEntity<Map<String, Object>> handleResourceConflictException(ResourceConflictException e) {
         Map<String, Object> map = new HashMap<>();
-
         map.put("timestamp", new Date(System.currentTimeMillis()));
         map.put("message", e.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(map);
