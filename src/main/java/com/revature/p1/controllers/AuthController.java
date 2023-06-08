@@ -36,6 +36,8 @@ public class AuthController {
             throw new ResourceConflictException("Passwords do not match");
         }
         System.out.println("Register user confirmation");
+        userService.registerUser(req);
+
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

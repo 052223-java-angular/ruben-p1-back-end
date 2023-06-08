@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -37,5 +40,12 @@ public class User {
     @JoinColumn(name = "army_id", referencedColumnName = "id")
     private Army army;
 
+    public User(String username, String password, Role role) {
+        this.id = UUID.randomUUID().toString();
+        this.username = username;
+        this.password = password;
+        this.army = new Army(); // testing to create a new army
+        this.role = role;
+    }
 
 }
