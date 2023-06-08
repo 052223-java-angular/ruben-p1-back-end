@@ -1,9 +1,13 @@
 package com.revature.p1.controllers;
 
+import com.revature.p1.dtos.requests.NewLoginRequest;
 import com.revature.p1.dtos.requests.NewUserRequest;
+import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.services.ArmyService;
+import com.revature.p1.services.JwtTokenService;
 import com.revature.p1.services.UserService;
 import com.revature.p1.utils.ResourceConflictException;
+import com.revature.p1.utils.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,7 @@ import java.util.Map;
 public class AuthController {
     private final UserService userService;
     private final ArmyService armyService;
+    private final JwtTokenService tokenService;
 
     // return a DTO containing new user information
     @PostMapping("/register") // sub path
@@ -44,6 +49,22 @@ public class AuthController {
 
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Principal> login(@RequestBody NewLoginRequest req) {
+        // check if username exists
+        if (userService.isUniqueUsername(req.getUsername())) {
+            throw new UserNotFoundException("User not found");
+        }
+        // login and set the principal
+        Principal principal= userService.login(req);
+
+        // create a jwt token and set the principal token
+        String token = tokenService.generateToken(principal);
+        principal.setToken(token);
+
+        return ResponseEntity.status(HttpStatus.OK).body(principal);
     }
 
     @ExceptionHandler(ResourceConflictException.class)

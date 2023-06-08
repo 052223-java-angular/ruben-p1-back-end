@@ -1,9 +1,11 @@
 package com.revature.p1.services;
 
+import com.revature.p1.dtos.requests.NewLoginRequest;
 import com.revature.p1.dtos.requests.NewUserRequest;
 import com.revature.p1.entities.Role;
-import com.revature.p1.repositories.RoleRepository;
+import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.repositories.UserRepository;
+import com.revature.p1.utils.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,18 @@ public class UserService {
     private final UserRepository userRepo;
     private final RoleService roleService;
 
+    public Principal login(NewLoginRequest req) {
+        // retrieve if user exists
+        Optional<User> userOpt = userRepo.findByUsername(req.getUsername());
+
+        if (userOpt.isPresent()) {
+            User foundUser = userOpt.get();
+            if (BCrypt.checkpw(req.getPassword(), foundUser.getPassword())) {
+                return new Principal(foundUser);
+            }
+        }
+        throw new UserNotFoundException("Invalid credentials");
+    }
 
     public User registerUser(NewUserRequest req) {
         // search if role exists and return
