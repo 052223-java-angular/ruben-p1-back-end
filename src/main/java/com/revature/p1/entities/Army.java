@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,5 +28,11 @@ public class Army {
     @OneToMany(mappedBy = "army", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<ArmyCreature> armies;
+
+    public Army(String username) {
+        this.id = UUID.randomUUID().toString();
+        this.name = username;
+        this.power = "0";
+    }
 
 }

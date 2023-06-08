@@ -35,16 +35,16 @@ public class User {
     @JoinColumn(name = "stats_id")
     @JsonBackReference
     private Stats stats;
-
+/*
     @OneToOne
     @JoinColumn(name = "army_id", referencedColumnName = "id")
     private Army army;
-
+*/
     public User(String username, String password, Role role) {
         this.id = UUID.randomUUID().toString();
         this.username = username;
         this.password = password;
-        this.army = new Army(); // testing to create a new army
+        //this.army = new Army(); // testing to create a new army
         this.role = role;
     }
 

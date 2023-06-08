@@ -1,6 +1,7 @@
 package com.revature.p1.controllers;
 
 import com.revature.p1.dtos.requests.NewUserRequest;
+import com.revature.p1.services.ArmyService;
 import com.revature.p1.services.UserService;
 import com.revature.p1.utils.ResourceConflictException;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.Map;
 @RequestMapping("/auth") // first path --> sub paths
 public class AuthController {
     private final UserService userService;
+    private final ArmyService armyService;
 
     // return a DTO containing new user information
     @PostMapping("/register") // sub path
@@ -37,6 +39,9 @@ public class AuthController {
         }
         System.out.println("Register user confirmation");
         userService.registerUser(req);
+        System.out.println(req.getUsername());
+        armyService.saveArmy(req.getUsername());
+
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
