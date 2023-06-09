@@ -33,6 +33,14 @@ public class MonstersController {
         return ResponseEntity.status(HttpStatus.OK).body(allCreatures);
     }
 
+    // finding creature by it's name
+    @GetMapping("/{name}")
+    public ResponseEntity<?> findById(@RequestBody NewMonsterRequest req) {
+        System.out.println("FIND BY NAME hit");
+        Creature foundCreature = creatureService.findByName(req.getName());
+        return ResponseEntity.status(HttpStatus.OK).body(foundCreature);
+    }
+
     // TODO edit for later exceptions with modifications
     @ExceptionHandler(ResourceConflictException.class)
     public ResponseEntity<Map<String, Object>> handleResourceConflictException(ResourceConflictException e) {

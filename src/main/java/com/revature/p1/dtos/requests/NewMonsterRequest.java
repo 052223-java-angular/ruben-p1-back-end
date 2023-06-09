@@ -11,6 +11,4 @@ import lombok.Setter;
 @Setter
 public class NewMonsterRequest {
     private String name;
-    private String description;
-    private String appearances;
 }
