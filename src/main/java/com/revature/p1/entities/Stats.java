@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,6 +20,7 @@ public class Stats {
 
     @Id
     private String id;
+    private String name;
 
     private String win;
 
@@ -29,6 +31,14 @@ public class Stats {
     @OneToMany(mappedBy = "stats", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<User> users;
+
+    public Stats(String username) {
+        this.id = UUID.randomUUID().toString();
+        this.name = username;
+        this.win = "0";
+        this.lose = "0";
+        this.kd_ratio = "0";
+    }
 
 
 }

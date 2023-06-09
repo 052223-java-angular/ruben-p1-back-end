@@ -5,6 +5,7 @@ import com.revature.p1.dtos.requests.NewUserRequest;
 import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.services.ArmyService;
 import com.revature.p1.services.JwtTokenService;
+import com.revature.p1.services.StatsService;
 import com.revature.p1.services.UserService;
 import com.revature.p1.utils.ResourceConflictException;
 import com.revature.p1.utils.UserNotFoundException;
@@ -24,6 +25,7 @@ import java.util.Map;
 public class AuthController {
     private final UserService userService;
     private final ArmyService armyService;
+    private final StatsService statsService;
     private final JwtTokenService tokenService;
 
     // return a DTO containing new user information
@@ -46,6 +48,7 @@ public class AuthController {
         userService.registerUser(req);
         System.out.println(req.getUsername());
         armyService.saveArmy(req.getUsername());
+        statsService.saveStats(req.getUsername());
 
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -73,5 +76,13 @@ public class AuthController {
         map.put("timestamp", new Date(System.currentTimeMillis()));
         map.put("message", e.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(map);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleResourceConflictException(UserNotFoundException e) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("timestamp", new Date(System.currentTimeMillis()));
+        map.put("message", e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
     }
 }

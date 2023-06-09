@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.revature.p1.dtos.responses.Principal;
 
+import io.jsonwebtoken.Claims;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 @Service
 public class JwtTokenService {
@@ -30,6 +32,32 @@ public class JwtTokenService {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))  // expiration time to 10 hours
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
+    }
+
+    public boolean validateToken(String token, Principal userPrincipal) {
+        String tokenUsername = extractUsername(token);
+        return tokenUsername.equals(userPrincipal.getUsername());
+    }
+
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+    }
+
+    public String extractUserId(String token) {
+        return (String) extractAllClaims(token).get("id");
+    }
+
+    public String extractUserRole(String token) {
+        return (String) extractAllClaims(token).get("role");
     }
 
     //
