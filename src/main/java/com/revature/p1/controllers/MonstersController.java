@@ -3,6 +3,7 @@ package com.revature.p1.controllers;
 import com.revature.p1.dtos.requests.NewMonsterRequest;
 import com.revature.p1.entities.Creature;
 import com.revature.p1.services.CreatureService;
+import com.revature.p1.utils.CreatureNotFoundException;
 import com.revature.p1.utils.ResourceConflictException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class MonstersController {
         return ResponseEntity.status(HttpStatus.OK).body(allCreatures);
     }
 
-    // finding creature by it's name
+    // finding creature by its name
     @GetMapping("/{name}")
     public ResponseEntity<?> findById(@RequestBody NewMonsterRequest req) {
         System.out.println("FIND BY NAME hit");
@@ -50,8 +51,8 @@ public class MonstersController {
 
 
     // TODO edit for later exceptions with modifications
-    @ExceptionHandler(ResourceConflictException.class)
-    public ResponseEntity<Map<String, Object>> handleResourceConflictException(ResourceConflictException e) {
+    @ExceptionHandler(CreatureNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleResourceConflictException(CreatureNotFoundException e) {
         Map<String, Object> map = new HashMap<>();
         map.put("timestamp", new Date(System.currentTimeMillis()));
         map.put("message", e.getMessage());
