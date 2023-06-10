@@ -18,6 +18,11 @@ public class CreatureService {
         return creatureList;
     }
 
+    public List<Creature> findByCategory_id(String category) {
+        List<Creature> creatureList = creatureRepo.findByCategory_id(category);
+        return creatureList;
+    }
+
     public Creature findByName(String name) {
         return creatureRepo.findByName(name)
                 .orElseThrow(() -> new RoleNotFoundException("Creature " + name + " not found"));

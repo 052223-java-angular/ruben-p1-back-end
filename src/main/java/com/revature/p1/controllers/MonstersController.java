@@ -41,6 +41,14 @@ public class MonstersController {
         return ResponseEntity.status(HttpStatus.OK).body(foundCreature);
     }
 
+    @GetMapping("/category/{category}")
+    public ResponseEntity<?> findByCategory_id(@RequestBody NewMonsterRequest req) {
+        System.out.println("HITTING category search");
+        List<Creature> allCreatures = creatureService.findByCategory_id(req.getName());
+        return ResponseEntity.status(HttpStatus.OK).body(allCreatures);
+    }
+
+
     // TODO edit for later exceptions with modifications
     @ExceptionHandler(ResourceConflictException.class)
     public ResponseEntity<Map<String, Object>> handleResourceConflictException(ResourceConflictException e) {
