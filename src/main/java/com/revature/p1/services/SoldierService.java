@@ -4,6 +4,7 @@ import com.revature.p1.dtos.requests.NewArmyMonsterRequest;
 import com.revature.p1.dtos.requests.NewUserRequest;
 import com.revature.p1.entities.Army;
 import com.revature.p1.entities.ArmyCreature;
+import com.revature.p1.entities.Creature;
 import com.revature.p1.entities.Role;
 import com.revature.p1.repositories.CreatureRepo;
 import com.revature.p1.repositories.SoldierRepo;
@@ -11,6 +12,8 @@ import com.revature.p1.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -26,4 +29,11 @@ public class SoldierService {
 
         return soldierRepo.save(newSoldier);
     }
+
+    public List<ArmyCreature> findByArmy_id(String army_id) {
+        List<ArmyCreature> creatureList = soldierRepo.findAllByArmy_id(army_id);
+        return creatureList;
+    }
+
+
 }

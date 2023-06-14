@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface SoldierRepo extends JpaRepository<ArmyCreature, String> {
 
     Optional<Stats> findByName(String name);
-    public List<SoldierRepo> findAllByArmy_id(String army_id);
+    public List<ArmyCreature> findAllByArmy_id(String army_id);
 
 }
