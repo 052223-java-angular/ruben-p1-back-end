@@ -27,9 +27,12 @@ public class ArmyController {
     @GetMapping("/{username}")
     public ResponseEntity<?> findByUsername(@RequestBody FindArmyRequest req) {
         Optional<Army> foundUser = armyService.findByUsername(req.getUsername());
-
-
         return ResponseEntity.status(HttpStatus.OK).body(foundUser);
     }
+
+
+
+
+
 
 }

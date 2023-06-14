@@ -11,7 +11,6 @@ import java.util.Optional;
 @Repository
 public interface CreatureRepo extends JpaRepository <Creature, String> {
 
-
     public List<Creature> findAll();
 
     public List<Creature> findByCategory_id(String category);

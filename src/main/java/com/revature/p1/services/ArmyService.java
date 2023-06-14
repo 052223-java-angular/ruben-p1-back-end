@@ -23,7 +23,14 @@ public class ArmyService {
         return armyRepo.save(newArmy);
     }
 
+    public boolean isValidArmy(String username) {
+        Optional<Army> armyOpt = armyRepo.findByName(username);
+        // if returns empty if does not exist
+        return armyOpt.isEmpty();
+    }
+
+
     public Optional<Army> findByUsername(String username) {
         return armyRepo.findByName(username);
-    };
+    }
 }

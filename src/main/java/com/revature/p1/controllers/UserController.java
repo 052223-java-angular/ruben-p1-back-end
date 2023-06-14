@@ -32,6 +32,7 @@ public class UserController {
     @GetMapping("/{username}")
     public ResponseEntity<?> findByUsername(@RequestBody FindUserRequest req) {
         Optional<User> foundUser = userService.findByUsername(req);
+
         return ResponseEntity.status(HttpStatus.OK).body(foundUser);
     }
 }

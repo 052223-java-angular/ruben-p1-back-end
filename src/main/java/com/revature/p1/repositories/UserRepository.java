@@ -13,8 +13,8 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, String> { //entity, id type
 
     // key! 'findBy' + 'column name'
-
     public List<User> findAll();
+
     Optional<User> findByUsername(String username);
 
 }
