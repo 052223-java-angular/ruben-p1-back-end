@@ -29,7 +29,9 @@ public class SoldierController {
     public ResponseEntity<?> deleteSolider(@RequestBody DeleteSoldierRequest req) {
         soldierService.deleteSoldier(req.getSoldier_id());
         System.out.println("Delete soldier hit");
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+
 
 }

@@ -7,6 +7,7 @@ import com.revature.p1.entities.Creature;
 import com.revature.p1.entities.Role;
 import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.repositories.UserRepository;
+import com.revature.p1.utils.ResourceConflictException;
 import com.revature.p1.utils.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
@@ -33,6 +34,14 @@ public class UserService {
             userNames.add(u.getUsername());
         }
         return userNames;
+    }
+
+    public Principal findById(String id) {
+        Optional<User> userOpt = userRepo.findById(id);
+        if (userOpt.isEmpty()) {
+            throw new ResourceConflictException("User notn found");
+        }
+        return new Principal(userOpt.get());
     }
 
     public Optional<User> findByUsername(FindUserRequest req) {

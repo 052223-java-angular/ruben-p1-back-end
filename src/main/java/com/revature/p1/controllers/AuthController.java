@@ -26,7 +26,7 @@ public class AuthController {
     private final UserService userService;
     private final ArmyService armyService;
     private final StatsService statsService;
-    //private final JwtTokenService tokenService;
+    private final JwtTokenService tokenService;
 
     // return a DTO containing new user information
     @PostMapping("/register") // sub path
@@ -64,8 +64,8 @@ public class AuthController {
         Principal principal= userService.login(req);
 
         // create a jwt token and set the principal token
-        //String token = tokenService.generateToken(principal);
-        //principal.setToken(token);
+        String token = tokenService.generateToken(principal);
+        principal.setToken(token);
 
         return ResponseEntity.status(HttpStatus.OK).body(principal);
     }
