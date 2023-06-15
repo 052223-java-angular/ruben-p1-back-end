@@ -92,7 +92,7 @@ public class BattleController {
 
 
 
-        // define winner
+        // define winners
 
         // update scoreboard for BOTH players
 
