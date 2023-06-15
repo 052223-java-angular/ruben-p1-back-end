@@ -1,15 +1,14 @@
 package com.revature.p1.controllers;
 
 import com.revature.p1.dtos.requests.NewArmyMonsterRequest;
-import com.revature.p1.dtos.requests.NewLoginRequest;
 import com.revature.p1.dtos.requests.NewMonsterRequest;
 import com.revature.p1.dtos.requests.TokenRequest;
 import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.entities.ArmyCreature;
 import com.revature.p1.entities.Creature;
 import com.revature.p1.services.*;
+import com.revature.p1.utils.ArmyNotFoundException;
 import com.revature.p1.utils.CreatureNotFoundException;
-import com.revature.p1.utils.ResourceConflictException;
 import com.revature.p1.utils.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -22,7 +21,7 @@ import java.util.*;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/monsters")
-public class MonstersController {
+public class CreatureController {
     private final CreatureService creatureService;
     private final ArmyService armyService;
     private final UserService userService;
@@ -60,6 +59,7 @@ public class MonstersController {
         String token = sreq.getHeader("auth_token");
         Principal principal = userService.findById(req.getUser_id());
         jwtTokenService.validateToken(token, principal);
+
         System.out.println("Fail case hit");
         Creature foundCreature = creatureService.findByName(req.getName());
         return ResponseEntity.status(HttpStatus.OK).body(foundCreature);
@@ -73,7 +73,7 @@ public class MonstersController {
         }
         // check to see if army exists to add into
         if (armyService.isValidArmy(req.getUsername())) {
-            throw new UserNotFoundException("User not found");
+            throw new ArmyNotFoundException("Army not found");
         }
 
         soldierService.addToArmy(req);
