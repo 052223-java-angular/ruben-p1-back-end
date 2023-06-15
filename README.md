@@ -9,7 +9,7 @@ This is a full-stack web application that allows users to browse a catalog of Hy
 - **As a user**, I want to register an account so I can browse Hyrule Bestiary.
 - **As a user**, I want to log in so I can see a list of creatures
 - **As a user**, I want to browse and catalogue creatures of interest for later view.
-- **As a user**, I want to browse fish by categories: species,element, stats.
+- **As a user**, I want to browse creatures by categories.
 - **As a user**, I want build my own army with the creatures logged.
 - **As a user**, I want to see my armies potential power.
 - **As a user**, I want to be able to review my monsters for others to see.
@@ -33,7 +33,7 @@ This is a full-stack web application that allows users to browse a catalog of Hy
 - Adding a research feature: additional API
 
 ## API
-- **Zelda API**: https://docs.zelda.fanapis.com/docs
+- **Hyrule Compendium API**:  https://gadhagod.github.io/Hyrule-Compendium-API/#/
 
 ## Tech Stacks
 

@@ -1,16 +1,21 @@
 package com.revature.p1.services;
 
+import com.revature.p1.dtos.requests.FindUserRequest;
 import com.revature.p1.dtos.requests.NewLoginRequest;
 import com.revature.p1.dtos.requests.NewUserRequest;
+import com.revature.p1.entities.Creature;
 import com.revature.p1.entities.Role;
 import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.repositories.UserRepository;
+import com.revature.p1.utils.ResourceConflictException;
 import com.revature.p1.utils.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import com.revature.p1.entities.User;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +23,36 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepo;
     private final RoleService roleService;
+
+    public List<String> findAll() {
+        List<User> userList = userRepo.findAll();
+        // sub array for containing user IDs
+        List<String> userNames = new ArrayList<>();
+
+        // Only return list of userIDs
+        for (User u: userList) {
+            userNames.add(u.getUsername());
+        }
+        return userNames;
+    }
+
+    public Principal findById(String id) {
+        Optional<User> userOpt = userRepo.findById(id);
+        if (userOpt.isEmpty()) {
+            throw new ResourceConflictException("User notn found");
+        }
+        return new Principal(userOpt.get());
+    }
+
+    public Optional<User> findByUsername(FindUserRequest req) {
+        Optional<User> userOpt = userRepo.findByUsername(req.getUsername());
+
+        if (userOpt.isPresent()) {
+            User foundUser = userOpt.get();
+           return Optional.of(foundUser);
+        }
+        throw new UserNotFoundException("User was not found");
+    }
 
     public Principal login(NewLoginRequest req) {
         // retrieve if user exists

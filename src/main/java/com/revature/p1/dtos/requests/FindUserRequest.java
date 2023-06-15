@@ -9,9 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class NewMonsterRequest {
-    private String name;
-
-    // for the token
-    private String user_id;
+public class FindUserRequest {
+    private String username;
 }

@@ -35,4 +35,6 @@ public class Army {
         this.power = "0";
     }
 
+
+
 }
