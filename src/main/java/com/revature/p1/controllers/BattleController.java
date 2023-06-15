@@ -80,6 +80,7 @@ public class BattleController {
 
             // battle of power
             if (blueSoldier > redSoldier) {
+                // notes
                 power2 -= redSoldier;
             }
             else {
