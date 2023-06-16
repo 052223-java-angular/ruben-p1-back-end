@@ -25,8 +25,6 @@ public class Creature {
 
     private String description;
 
-    private String power;
-
     @OneToMany(mappedBy = "creature", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<ArmyCreature> armies;
