@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository<User, String> { //entity, 
 
     Optional<User> findByUsername(String username);
 
+    Optional<User> findById(String player_id);
+
 }

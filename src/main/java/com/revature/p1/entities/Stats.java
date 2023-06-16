@@ -20,11 +20,11 @@ public class Stats {
 
     @Id
     private String id;
-    private String name;
+    private String username;
 
-    private String win;
+    private int win;
 
-    private String lose;
+    private int lose;
 
     private String kd_ratio;
 
@@ -34,12 +34,18 @@ public class Stats {
 
     public Stats(String username) {
         this.id = UUID.randomUUID().toString();
-        this.name = username;
-        this.win = "0";
-        this.lose = "0";
+        this.username = username;
+        this.win = 0;
+        this.lose = 0;
         this.kd_ratio = "0";
     }
 
-
+    public Stats(Stats stats) {
+        this.id = stats.getId();
+        this.username = stats.getUsername();
+        this.win = stats.getWin();
+        this.lose = stats.getLose();
+        this.kd_ratio = stats.getKd_ratio();
+    }
 }
 

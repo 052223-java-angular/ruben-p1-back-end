@@ -5,10 +5,7 @@ import com.revature.p1.dtos.requests.NewMonsterRequest;
 import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.entities.Army;
 import com.revature.p1.entities.ArmyCreature;
-import com.revature.p1.services.ArmyService;
-import com.revature.p1.services.JwtTokenService;
-import com.revature.p1.services.SoldierService;
-import com.revature.p1.services.UserService;
+import com.revature.p1.services.*;
 import com.revature.p1.utils.ArmyNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -32,11 +29,12 @@ public class BattleController {
     private final JwtTokenService jwtTokenService;
     private final ArmyService armyService;
     private final SoldierService soldierService;
+    private final StatsService statsService;
 
     @GetMapping("/create")
     public ResponseEntity<?> createBattle(@RequestBody NewBattleRequest req, HttpServletRequest sreq) {
         // validate the token request
-        String token = sreq.getHeader("auth_token");
+        String token = sreq.getHeader("auth-token");
         Principal principal = userService.findById(req.getUser_id());
         jwtTokenService.validateToken(token, principal);
 
@@ -88,17 +86,17 @@ public class BattleController {
             }
             count++;
         }
-
-
-
-
         // define winners
+        if (power1 > power2) {
+
+        }
+
 
         // update scoreboard for BOTH players
 
         // output win/loss
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(pTwoArmy.get(0));
+        return ResponseEntity.status(HttpStatus.CREATED).body(req);
     }
 
 }

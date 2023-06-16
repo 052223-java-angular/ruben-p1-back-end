@@ -41,7 +41,7 @@ public class CreatureController {
     public ResponseEntity<?> findAll(@RequestBody TokenRequest req, HttpServletRequest sreq){
 
         // validate the token request
-        String token = sreq.getHeader("auth_token");
+        String token = sreq.getHeader("auth-token");
         Principal principal = userService.findById(req.getUser_id());
         jwtTokenService.validateToken(token, principal);
 
@@ -56,7 +56,7 @@ public class CreatureController {
     public ResponseEntity<?> findById(@RequestBody NewMonsterRequest req, HttpServletRequest sreq) {
 
         // validate the token request
-        String token = sreq.getHeader("auth_token");
+        String token = sreq.getHeader("auth-token");
         Principal principal = userService.findById(req.getUser_id());
         jwtTokenService.validateToken(token, principal);
 
