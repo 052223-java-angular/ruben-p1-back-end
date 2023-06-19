@@ -24,8 +24,6 @@ This is a full-stack web application that allows users to browse a catalog of Hy
 - Adding monsters from the catalog to personal army
 - Create user army
 - Modifying the army; add, remove monsters.
-- Leave review of experience with monsters.
-- Browse reviews of a monsters in catalog, left by existing members
 - View other users and their army for battle
 - simulate combat with other users army and yours
 
