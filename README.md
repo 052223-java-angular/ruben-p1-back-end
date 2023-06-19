@@ -12,10 +12,8 @@ This is a full-stack web application that allows users to browse a catalog of Hy
 - **As a user**, I want to browse creatures by categories.
 - **As a user**, I want build my own army with the creatures logged.
 - **As a user**, I want to see my armies potential power.
-- **As a user**, I want to be able to review my monsters for others to see.
-- **As a user**, I want to see other users reviews on a monster to determine interest.
 - **As a user**, I want to learn more about the monster: description, details.
-
+- **As a user**, I want to simulate battling another users army
 
 ## MVP (Minimum Viable Product)
 
