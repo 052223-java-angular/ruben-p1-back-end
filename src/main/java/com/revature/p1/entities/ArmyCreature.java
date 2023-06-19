@@ -25,9 +25,8 @@ public class ArmyCreature{
     @Column(nullable = false)
     private String name;
 
-    private String power;
+    private int power;
 
-    private String stock;
 
     @ManyToOne
     @JoinColumn(name = "army_id")
@@ -42,8 +41,7 @@ public class ArmyCreature{
     public ArmyCreature (Creature creature, Army army) {
         this.id = UUID.randomUUID().toString();
         this.name = creature.getName();
-        this.power = "0";
-        this.stock = "0";
+        this.power = 0;
 
         // these may get shifted
         this.army = army;

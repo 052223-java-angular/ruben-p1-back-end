@@ -40,21 +40,21 @@ public class SoldierService {
 
         // parse and set power based on creature
         if (name.contains("guardian")) {
-            newSoldier.setPower("15");
+            newSoldier.setPower(15);
         } else if (name.contains("lynel")){
-            newSoldier.setPower("10");
+            newSoldier.setPower(10);
         } else if (name.contains("lizal")){
-            newSoldier.setPower("5");
+            newSoldier.setPower(5);
         } else if (name.contains("lynel")){
-            newSoldier.setPower("10");
+            newSoldier.setPower(10);
         } else if (name.contains("octorok")){
-            newSoldier.setPower("3");
+            newSoldier.setPower(3);
         } else if (name.contains("moblin")){
-            newSoldier.setPower("3");
+            newSoldier.setPower(3);
         }  else if (name.contains("wizzrobe")){
-            newSoldier.setPower("5");
+            newSoldier.setPower(5);
         } else {
-            newSoldier.setPower("1");
+            newSoldier.setPower(1);
         }
 
 

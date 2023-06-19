@@ -23,7 +23,7 @@ public class Army {
     @Column(name = "name", nullable = false)
     private String name;
 
-    private String power;
+    private int power;
 
     @OneToMany(mappedBy = "army", fetch = FetchType.LAZY)
     @JsonManagedReference
@@ -32,7 +32,7 @@ public class Army {
     public Army(String username) {
         this.id = UUID.randomUUID().toString();
         this.name = username;
-        this.power = "0";
+        this.power = 0;
     }
 
 

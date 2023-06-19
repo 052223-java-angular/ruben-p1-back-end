@@ -56,8 +56,8 @@ public class BattleController {
         }
 
         // define the player power level
-        int power1 = Integer.parseInt(p1.get().getPower()) ;
-        int power2 = Integer.parseInt(p2.get().getPower());
+        int power1 = p1.get().getPower() ;
+        int power2 = p2.get().getPower();
 
         // get list of soldiers in player armies
         List<ArmyCreature> pOneArmy = soldierService.findByArmy_id(p1.get().getId());
@@ -85,8 +85,8 @@ public class BattleController {
                 break;
             }
             // obtain powers from next soldiers
-            blueSoldier = Integer.parseInt(pOneArmy.get(count).getPower());
-            redSoldier = Integer.parseInt(pTwoArmy.get(count).getPower());
+            blueSoldier = pOneArmy.get(count).getPower();
+            redSoldier = pTwoArmy.get(count).getPower();
 
             // battle of power
             if (blueSoldier > redSoldier) {

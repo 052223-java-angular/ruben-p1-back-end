@@ -8,6 +8,8 @@ idea/
 application.
 application/
 /application
+./application.log
+./application.log.
 
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
