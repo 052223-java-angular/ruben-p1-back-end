@@ -31,6 +31,11 @@ public class BattleController {
     private final SoldierService soldierService;
     private final StatsService statsService;
 
+    /**
+     * Creates a battle between two users
+     * @param req player1, player 2, session id
+     * @return status for success or fail
+     */
     @GetMapping("/create")
     public ResponseEntity<?> createBattle(@RequestBody NewBattleRequest req, HttpServletRequest sreq) {
         // validate the token request
@@ -68,9 +73,16 @@ public class BattleController {
 
         // iterate through and "battle"
         while(!over) {
+            // if either army is out of soldiers
+            if (pOneArmy.get(count) == null || pTwoArmy.get(count) == null ) {
+                over = true;
+                break;
+            }
+
             // if either player has reached 0 health
             if ((power1 <= 0) || (power2 <= 0)) {
                 over = true;
+                break;
             }
             // obtain powers from next soldiers
             blueSoldier = Integer.parseInt(pOneArmy.get(count).getPower());
@@ -88,9 +100,8 @@ public class BattleController {
         }
         // define winners
         if (power1 > power2) {
-
+            // this is where I needed to update the scores...
         }
-
 
         // update scoreboard for BOTH players
 

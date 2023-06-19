@@ -4,6 +4,11 @@ target/
 .idea/
 idea/
 
+#application
+application.
+application/
+/application
+
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

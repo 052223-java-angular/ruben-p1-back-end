@@ -18,6 +18,11 @@ import java.util.List;
 public class SoldierController {
     private final SoldierService soldierService;
 
+    /**
+     * Return the army by its id
+     * @param req army id to return soldiers by
+     * @return list of soldiers tied to that army id
+     */
     @GetMapping("/{army_id}")
     public ResponseEntity<?> findByArmy(@RequestBody FindSoldierArmyIdRequest req){
         List<ArmyCreature> userSoldiers = soldierService.findByArmy_id(req.getArmy_id());
@@ -25,6 +30,11 @@ public class SoldierController {
         return ResponseEntity.status(HttpStatus.OK).body(userSoldiers);
     }
 
+    /**
+     * deletes soldier from the army
+     * @param req soldier id to delete
+     * @return status indicating success request or fail
+     */
     @DeleteMapping("/delete/{soldier_id}")
     public ResponseEntity<?> deleteSolider(@RequestBody DeleteSoldierRequest req) {
         soldierService.deleteSoldier(req.getSoldier_id());

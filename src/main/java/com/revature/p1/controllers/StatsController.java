@@ -28,10 +28,14 @@ public class StatsController {
     private final JwtTokenService jwtTokenService;
     private final StatsService statsService;
 
-    // update user score
+    /**
+     * Updates the scoreboard of the requested user
+     * @param req player to update, win/loss update, session id
+     * @param sreq header for token authentication
+     * @return response for the updated scoreboard
+     */
     @PutMapping("/{username}")
     public ResponseEntity<?> findByUsername(@RequestBody UpdateScoreRequest req, HttpServletRequest sreq) {
-
 
         // validate the token request
         String token = sreq.getHeader("auth-token");

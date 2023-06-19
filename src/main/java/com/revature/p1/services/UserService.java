@@ -24,6 +24,10 @@ public class UserService {
     private final UserRepository userRepo;
     private final RoleService roleService;
 
+    /**
+     * Finds User by username
+     * @return list of existing users by STRING only
+     */
     public List<String> findAll() {
         List<User> userList = userRepo.findAll();
         // sub array for containing user IDs
@@ -36,6 +40,11 @@ public class UserService {
         return userNames;
     }
 
+    /**
+     * Finds User by id
+     * @param id name to query
+     * @return user if found
+     */
     public Principal findById(String id) {
         Optional<User> userOpt = userRepo.findById(id);
         if (userOpt.isEmpty()) {
@@ -44,6 +53,11 @@ public class UserService {
         return new Principal(userOpt.get());
     }
 
+    /**
+     * Finds User by username
+     * @param req name to query
+     * @return user if found
+     */
     public Optional<User> findByUsername(FindUserRequest req) {
         Optional<User> userOpt = userRepo.findByUsername(req.getUsername());
 
@@ -54,6 +68,11 @@ public class UserService {
         throw new UserNotFoundException("User was not found");
     }
 
+    /**
+     * Queries for user and returns if success
+     * @param req username, password and confirmPassword to verify
+     * @return Principal for session details
+     */
     public Principal login(NewLoginRequest req) {
         // retrieve if user exists
         Optional<User> userOpt = userRepo.findByUsername(req.getUsername());
@@ -67,13 +86,17 @@ public class UserService {
         throw new UserNotFoundException("Invalid credentials");
     }
 
+    /**
+     * Creates a new user
+     * @param req username of registered user, password to hash
+     * @return saves new user to repo
+     */
     public User registerUser(NewUserRequest req) {
         // search if role exists and return
         Role userRole = roleService.findByName("USER");
 
         // generate a salt and encrypt password
         String hashedPass = BCrypt.hashpw(req.getPassword(), BCrypt.gensalt());
-
         User newUser = new User(req.getUsername(), hashedPass, userRole);
 
         return userRepo.save(newUser);

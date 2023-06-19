@@ -24,6 +24,11 @@ public class SoldierService {
     private final ArmyService armyService;
     private final SoldierRepo soldierRepo;
 
+    /**
+     * Creates a new soldier from creature details
+     * @param req creature name, army username
+     * @return saves soldier to soldiers repo
+     */
     public ArmyCreature addToArmy(NewArmyMonsterRequest req) {
 
         ArmyCreature newSoldier = new ArmyCreature(creatureService.findByName(req.getName()),
@@ -32,20 +37,28 @@ public class SoldierService {
         return soldierRepo.save(newSoldier);
     }
 
+    /**
+     * Finds list of soldiers that exist in army
+     * @param army_id
+     * @return list of creatures
+     */
     public List<ArmyCreature> findByArmy_id(String army_id) {
         List<ArmyCreature> creatureList = soldierRepo.findAllByArmy_id(army_id);
         return creatureList;
     }
 
+    /**
+     * Deletes existing soldier from the army
+     * @param soldier_id query repo with id
+     * @return nothing
+     */
     public void deleteSoldier(String soldier_id) {
         Optional<ArmyCreature> soldierExists = soldierRepo.findById(soldier_id);
         // throw exception if not found
         if (soldierExists.isEmpty()) {
             throw new CreatureNotFoundException("Soldier does not exist");
         }
-
         // make updates to army stats if/when necessary
-
         soldierRepo.deleteById(soldier_id);
     }
 

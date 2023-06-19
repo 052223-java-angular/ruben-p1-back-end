@@ -30,13 +30,22 @@ public class CreatureController {
 
     // inject services
 
+    /**
+     * creates a new creature *ADMIN ONLY*
+     * @param req creature name, descriptions, details
+     * @return status for success or fail
+     */
     @PostMapping("/create")
     // only admins should use this field to add new monsters
     public ResponseEntity<?> createMonster(@RequestBody NewMonsterRequest req) {
         return ResponseEntity.status(HttpStatus.CREATED).body(req);
     }
 
-    // returns all the monsters that exist on the database
+    /**
+     * Find and return all monsters on db
+     * @param req session id for token verification
+     * @return list of entities that match query
+     */
     @GetMapping("/all")
     public ResponseEntity<?> findAll(@RequestBody TokenRequest req, HttpServletRequest sreq){
 
@@ -51,7 +60,12 @@ public class CreatureController {
         return ResponseEntity.status(HttpStatus.OK).body(allCreatures);
     }
 
-    // finding creature by its name
+    /**
+     * Find creatures by their name
+     * @param req monster name and session id
+     * @param sreq obtain header token for verification
+     * @return
+     */
     @GetMapping("/{name}")
     public ResponseEntity<?> findById(@RequestBody NewMonsterRequest req, HttpServletRequest sreq) {
 
@@ -65,8 +79,19 @@ public class CreatureController {
         return ResponseEntity.status(HttpStatus.OK).body(foundCreature);
     }
 
+    /**
+     * Adds creature to user army containing base details: name, army id, creature id
+     * @param req username, creature id, army id, power
+     * @param sreq header for token authentication
+     * @return add status
+     */
     @PostMapping("/{name}/add")
-    public ResponseEntity<ArmyCreature> addToArmy(@RequestBody NewArmyMonsterRequest req) {
+    public ResponseEntity<ArmyCreature> addToArmy(@RequestBody NewArmyMonsterRequest req, HttpServletRequest sreq) {
+        // validate the token request
+        String token = sreq.getHeader("auth-token");
+        Principal principal = userService.findById(req.getUser_id());
+        jwtTokenService.validateToken(token, principal);
+
         // check if username to make sure actual user exists to add to their army
         if (userService.isUniqueUsername(req.getUsername())) {
             throw new UserNotFoundException("User not found");
@@ -80,15 +105,28 @@ public class CreatureController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    /**
+     * Search creatures by defined category
+     * @param req name of the category to search along with session id
+     * @param sreq header for token authentication
+     * @return list of creatures that exist in that category
+     */
     @GetMapping("/category/{category}")
-    public ResponseEntity<?> findByCategory_id(@RequestBody NewMonsterRequest req) {
+    public ResponseEntity<?> findByCategory_id(@RequestBody NewMonsterRequest req, HttpServletRequest sreq) {
+
+        // validate the token request
+        String token = sreq.getHeader("auth-token");
+        Principal principal = userService.findById(req.getUser_id());
+        jwtTokenService.validateToken(token, principal);
+
+
         System.out.println("HITTING category search");
         List<Creature> allCreatures = creatureService.findByCategory_id(req.getName());
         return ResponseEntity.status(HttpStatus.OK).body(allCreatures);
     }
 
 
-    // TODO edit for later exceptions with modifications
+    //
     @ExceptionHandler(CreatureNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleResourceConflictException(CreatureNotFoundException e) {
         Map<String, Object> map = new HashMap<>();

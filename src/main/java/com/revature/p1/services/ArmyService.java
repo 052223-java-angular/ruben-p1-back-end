@@ -18,18 +18,32 @@ import java.util.Optional;
 public class ArmyService {
     private final ArmyRepo armyRepo;
 
+    /**
+     * saves new army tied to username
+     * @param username username of the new registered user
+     * @return newly saved army entity
+     */
     public Army saveArmy(String username) {
         Army newArmy = new Army(username);
         return armyRepo.save(newArmy);
     }
 
+    /**
+     * checks if army is valid by username
+     * @param username registered user to query for army
+     * @return true or false if army exists
+     */
     public boolean isValidArmy(String username) {
         Optional<Army> armyOpt = armyRepo.findByName(username);
         // if returns empty if does not exist
         return armyOpt.isEmpty();
     }
 
-
+    /**
+     * Finds army entity and returns
+     * @param username username query for army
+     * @return add status
+     */
     public Optional<Army> findByUsername(String username) {
         return armyRepo.findByName(username);
     }

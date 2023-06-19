@@ -16,4 +16,7 @@ public class NewArmyMonsterRequest {
     private String creature_id;
     private String power;
     private String stock;
+
+    // for the token
+    private String user_id;
 }

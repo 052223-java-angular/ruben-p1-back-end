@@ -28,7 +28,11 @@ public class AuthController {
     private final StatsService statsService;
     private final JwtTokenService tokenService;
 
-    // return a DTO containing new user information
+    /**
+     * Registers a new user to db.
+     * @param req contains username, passwords for user account
+     * @return status for success or fail
+     */
     @PostMapping("/register") // sub path
     public ResponseEntity<?>registerUser(@RequestBody NewUserRequest req) { // DTO
         // check unique username
@@ -54,6 +58,11 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    /**
+     * Login existing user
+     * @param req contains username, password, confirm password for query. session id
+     * @return response indicating success or fail
+     */
     @PostMapping("/login")
     public ResponseEntity<Principal> login(@RequestBody NewLoginRequest req) {
         // check if username exists

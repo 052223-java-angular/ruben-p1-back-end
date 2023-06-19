@@ -21,11 +21,21 @@ public class StatsService {
     private final UserService userService;
 
 
+    /**
+     * Creates a new score board from registered user
+     * @param username creates new board tied to this user
+     * @return saves stats to stats repo
+     */
     public Stats saveStats(String username) {
         Stats newStats = new Stats(username);
         return  statsRepo.save(newStats);
     }
 
+    /**
+     * Searches and returns statistics of given user
+     * @param id user id to look up stats
+     * @return stat board of user
+     */
     public Optional<Stats> findById(String id) {
         Optional<Stats> userOpt = statsRepo.findById(id);
         if (userOpt.isEmpty()) {
@@ -34,6 +44,13 @@ public class StatsService {
         return userOpt;
     }
 
+    /**
+     * updates the stats of the user from given DTO
+     * @param win increment
+     * @param loss increment
+     * @param username username to update
+     * @return reponse body showing new updated scoreboard
+     */
     public StatsResponse updateStats(int win, int loss, String username) {
 
         // get player stats to update

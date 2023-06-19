@@ -22,6 +22,10 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
 
+    /**
+     * Finds all users that exist on the database
+     * @return list of users that exist on the databse. only usernames
+     */
     @GetMapping("/all")
     public ResponseEntity<?> findAll(){
         List<String> allUsers = userService.findAll();
@@ -29,6 +33,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(allUsers);
     }
 
+    /**
+     * Finds and returns User entitity
+     * @param req username to query
+     * @return user found
+     */
     @GetMapping("/{username}")
     public ResponseEntity<?> findByUsername(@RequestBody FindUserRequest req) {
         Optional<User> foundUser = userService.findByUsername(req);

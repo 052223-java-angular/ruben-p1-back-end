@@ -24,12 +24,15 @@ public class ArmyController {
     private final UserService userService;
     private final ArmyService armyService;
 
+    /**
+     * Finds an army by its username.
+     * @param req contains the username to query and the session id
+     * @return the army that belongs to username
+     */
     @GetMapping("/{username}")
     public ResponseEntity<?> findByUsername(@RequestBody FindArmyRequest req) {
         Optional<Army> foundUser = armyService.findByUsername(req.getUsername());
         return ResponseEntity.status(HttpStatus.OK).body(foundUser);
     }
-
-
 
 }
