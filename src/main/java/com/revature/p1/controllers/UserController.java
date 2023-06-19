@@ -26,6 +26,7 @@ public class UserController {
      * Finds all users that exist on the database
      * @return list of users that exist on the databse. only usernames
      */
+
     @GetMapping("/all")
     public ResponseEntity<?> findAll(){
         List<String> allUsers = userService.findAll();
@@ -38,6 +39,7 @@ public class UserController {
      * @param req username to query
      * @return user found
      */
+
     @GetMapping("/{username}")
     public ResponseEntity<?> findByUsername(@RequestBody FindUserRequest req) {
         Optional<User> foundUser = userService.findByUsername(req);

@@ -58,6 +58,5 @@ public class JwtTokenService {
     public String extractUserRole(String token) {
         return (String) extractAllClaims(token).get("role");
     }
-
     //
 }

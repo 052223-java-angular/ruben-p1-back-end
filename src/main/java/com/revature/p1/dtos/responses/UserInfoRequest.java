@@ -23,7 +23,4 @@ public class UserInfoRequest {
         this.army_id = army_id;
         this.stats_id = stats_id;
     }
-
 }
-
-

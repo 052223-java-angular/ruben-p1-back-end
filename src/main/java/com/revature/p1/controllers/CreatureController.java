@@ -125,7 +125,6 @@ public class CreatureController {
         return ResponseEntity.status(HttpStatus.OK).body(allCreatures);
     }
 
-
     //
     @ExceptionHandler(CreatureNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleResourceConflictException(CreatureNotFoundException e) {

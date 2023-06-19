@@ -6,6 +6,9 @@ import com.revature.p1.entities.Army;
 import com.revature.p1.entities.User;
 import com.revature.p1.services.ArmyService;
 import lombok.AllArgsConstructor;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,7 @@ import com.revature.p1.services.UserService;
 public class ArmyController {
     private final UserService userService;
     private final ArmyService armyService;
+    private static final Logger logger = LogManager.getLogger(ArmyController.class);
 
     /**
      * Finds an army by its username.
@@ -31,6 +35,7 @@ public class ArmyController {
      */
     @GetMapping("/{username}")
     public ResponseEntity<?> findByUsername(@RequestBody FindArmyRequest req) {
+        logger.info("Searching army by username");
         Optional<Army> foundUser = armyService.findByUsername(req.getUsername());
         return ResponseEntity.status(HttpStatus.OK).body(foundUser);
     }

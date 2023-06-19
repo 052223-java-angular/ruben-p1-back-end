@@ -34,6 +34,31 @@ public class SoldierService {
         ArmyCreature newSoldier = new ArmyCreature(creatureService.findByName(req.getName()),
                 armyService.findByUsername(req.getUsername()).get());
 
+        // set the power of the creature by parsing name, switch to lower for spelling
+        String name = newSoldier.getName().toLowerCase();
+
+
+        // parse and set power based on creature
+        if (name.contains("guardian")) {
+            newSoldier.setPower("15");
+        } else if (name.contains("lynel")){
+            newSoldier.setPower("10");
+        } else if (name.contains("lizal")){
+            newSoldier.setPower("5");
+        } else if (name.contains("lynel")){
+            newSoldier.setPower("10");
+        } else if (name.contains("octorok")){
+            newSoldier.setPower("3");
+        } else if (name.contains("moblin")){
+            newSoldier.setPower("3");
+        }  else if (name.contains("wizzrobe")){
+            newSoldier.setPower("5");
+        } else {
+            newSoldier.setPower("1");
+        }
+
+
+
         return soldierRepo.save(newSoldier);
     }
 

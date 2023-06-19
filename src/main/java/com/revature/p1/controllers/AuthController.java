@@ -10,6 +10,8 @@ import com.revature.p1.services.UserService;
 import com.revature.p1.utils.ResourceConflictException;
 import com.revature.p1.utils.UserNotFoundException;
 import lombok.AllArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,7 @@ public class AuthController {
     private final ArmyService armyService;
     private final StatsService statsService;
     private final JwtTokenService tokenService;
+    private static final Logger logger = LogManager.getLogger(AuthController.class);
 
     /**
      * Registers a new user to db.
@@ -39,6 +42,7 @@ public class AuthController {
         if (!userService.isUniqueUsername(req.getUsername())) {
             throw new ResourceConflictException("Username is not unique");
         }
+
         // check password
         if (!userService.isValidPassword(req.getPassword())) {
             throw new ResourceConflictException("Password invalid. 8+ chars, one digit, one upper/lower");
@@ -48,12 +52,12 @@ public class AuthController {
         if (!userService.checkPasswords(req.getPassword(), req.getConfirmPassword())) {
             throw new ResourceConflictException("Passwords do not match");
         }
+
         System.out.println("Register user confirmation");
         userService.registerUser(req);
         System.out.println(req.getUsername());
         armyService.saveArmy(req.getUsername());
         statsService.saveStats(req.getUsername());
-
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
