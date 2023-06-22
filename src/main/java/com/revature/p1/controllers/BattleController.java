@@ -2,6 +2,7 @@ package com.revature.p1.controllers;
 
 import com.revature.p1.dtos.requests.NewBattleRequest;
 import com.revature.p1.dtos.requests.NewMonsterRequest;
+import com.revature.p1.dtos.responses.BattleOutcomeResponse;
 import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.entities.Army;
 import com.revature.p1.entities.ArmyCreature;
@@ -43,8 +44,9 @@ public class BattleController {
         Principal principal = userService.findById(req.getUser_id());
         jwtTokenService.validateToken(token, principal);
 
+        BattleOutcomeResponse outcome;
         Boolean over = false;
-        int count = 0;
+        int count = 0; // change as conditions change
 
         // grab the two passed users to battle
         Optional<Army> p1 = armyService.findByUsername(req.getPlayer_1());
@@ -64,6 +66,7 @@ public class BattleController {
         List<ArmyCreature> pTwoArmy = soldierService.findByArmy_id(p2.get().getId());
 
         // over power conditions: larger armies || power difference
+        // OR large delta in powers
         if (pOneArmy.size() > pTwoArmy.size()) {
             System.out.println("Army size differences");
         }
@@ -85,6 +88,8 @@ public class BattleController {
                 break;
             }
             // obtain powers from next soldiers
+
+            // add condition to check if get is NULL, then list is empty and other player wins
             blueSoldier = pOneArmy.get(count).getPower();
             redSoldier = pTwoArmy.get(count).getPower();
 
@@ -99,15 +104,20 @@ public class BattleController {
             count++;
         }
         // define winners
+        // update scoreboard for BOTH players
         if (power1 > power2) {
             // this is where I needed to update the scores...
+            statsService.updateStats(1, 0, req.getPlayer_1()); // player 1 wins
+            statsService.updateStats(0, 1, req.getPlayer_2()); // player 2 loss
+            outcome = new BattleOutcomeResponse(req.getPlayer_1(), req.getPlayer_2());
+        } else {
+            statsService.updateStats(1, 0, req.getPlayer_2()); // player 2 win
+            statsService.updateStats(0,1,req.getPlayer_1()); // player 1 loss
+            outcome = new BattleOutcomeResponse(req.getPlayer_2(), req.getPlayer_1());
         }
 
-        // update scoreboard for BOTH players
-
         // output win/loss
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(req);
+        return ResponseEntity.status(HttpStatus.CREATED).body(outcome);
     }
 
 }

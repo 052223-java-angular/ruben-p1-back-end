@@ -1,6 +1,7 @@
 package com.revature.p1.controllers;
 
 import com.revature.p1.dtos.requests.FindUserRequest;
+import com.revature.p1.dtos.responses.UserInfoRequest;
 import com.revature.p1.entities.Creature;
 import com.revature.p1.entities.User;
 import com.revature.p1.services.UserService;
@@ -8,14 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins="http://localhost:4200", exposedHeaders="Access-Control-Allow-Origin")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/users")
@@ -29,7 +28,7 @@ public class UserController {
 
     @GetMapping("/all")
     public ResponseEntity<?> findAll(){
-        List<String> allUsers = userService.findAll();
+        List<UserInfoRequest> allUsers = userService.findAll();
         System.out.println("USER GET ALL hit");
         return ResponseEntity.status(HttpStatus.OK).body(allUsers);
     }

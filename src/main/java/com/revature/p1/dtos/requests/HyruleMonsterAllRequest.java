@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ *  REPRESENTS HYRULE API RETURN VALES WE NEED
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -12,7 +15,7 @@ import lombok.Setter;
 public class HyruleMonsterAllRequest {
     private String name;
     private String description;
-    private String image;
+    private String image; // url to image
     private String location;
 
     // use for token ?

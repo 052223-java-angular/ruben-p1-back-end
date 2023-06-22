@@ -12,8 +12,9 @@ import lombok.Setter;
 public class NewArmyMonsterRequest {
     private String username;
     private String name;
+    private String description;
     private String army_id;
-    private String creature_id;
+    private String image;
     private int power;
 
     // for the token

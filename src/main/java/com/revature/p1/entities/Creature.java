@@ -29,10 +29,6 @@ public class Creature {
     private String location;
     private String image;
 
-    @OneToMany(mappedBy = "creature", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private Set<ArmyCreature> armies;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonBackReference

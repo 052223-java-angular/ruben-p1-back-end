@@ -3,16 +3,17 @@ package com.revature.p1.services;
 import com.revature.p1.dtos.requests.FindUserRequest;
 import com.revature.p1.dtos.requests.NewLoginRequest;
 import com.revature.p1.dtos.requests.NewUserRequest;
-import com.revature.p1.entities.Creature;
-import com.revature.p1.entities.Role;
+import com.revature.p1.dtos.responses.UserInfoRequest;
+import com.revature.p1.entities.*;
 import com.revature.p1.dtos.responses.Principal;
+import com.revature.p1.repositories.ArmyRepo;
+import com.revature.p1.repositories.StatsRepo;
 import com.revature.p1.repositories.UserRepository;
 import com.revature.p1.utils.ResourceConflictException;
 import com.revature.p1.utils.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-import com.revature.p1.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,21 +24,29 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepo;
     private final RoleService roleService;
+    private final ArmyRepo armyRepo;
+    private final StatsRepo statsRepo;
 
     /**
      * Finds User by username
      * @return list of existing users by STRING only
      */
-    public List<String> findAll() {
+    public List<UserInfoRequest> findAll() {
         List<User> userList = userRepo.findAll();
         // sub array for containing user IDs
-        List<String> userNames = new ArrayList<>();
+        List<UserInfoRequest> users = new ArrayList<>();
 
-        // Only return list of userIDs
+        // Go through user objects and only return SAFE metrics
         for (User u: userList) {
-            userNames.add(u.getUsername());
+            Optional<Army> armyOpt = armyRepo.findByName(u.getUsername());
+            Optional<Stats> statsOpt = statsRepo.findByUsername(u.getUsername());
+
+            String army_id = armyOpt.get().getId();
+            String stats_id = statsOpt.get().getId();
+
+            users.add(new UserInfoRequest(u.getId(), u.getUsername(), army_id, stats_id));
         }
-        return userNames;
+        return users;
     }
 
     /**

@@ -27,16 +27,15 @@ public class ArmyCreature{
 
     private int power;
 
+    private String image;
+
+    private String description;
 
     @ManyToOne
     @JoinColumn(name = "army_id")
     @JsonBackReference
     private Army army;
 
-    @ManyToOne
-    @JoinColumn(name = "creature_id")
-    @JsonBackReference
-    private Creature creature;
 
     public ArmyCreature (Creature creature, Army army) {
         this.id = UUID.randomUUID().toString();
@@ -45,7 +44,6 @@ public class ArmyCreature{
 
         // these may get shifted
         this.army = army;
-        this.creature = creature;
     }
 
 }
