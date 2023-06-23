@@ -78,8 +78,9 @@ public class UserService {
      * @param req name to query
      * @return user if found
      */
-    public Optional<User> findByUsername(FindUserRequest req) {
-        Optional<User> userOpt = userRepo.findByUsername(req.getUsername());
+    public Optional<User> findByUsername(String req) {
+        Optional<User> userOpt = userRepo.findByUsername(req);
+        System.out.print(req);
 
         if (userOpt.isPresent()) {
             User foundUser = userOpt.get();

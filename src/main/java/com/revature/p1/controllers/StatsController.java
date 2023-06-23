@@ -4,6 +4,7 @@ import com.revature.p1.dtos.requests.FindUserRequest;
 import com.revature.p1.dtos.requests.UpdateScoreRequest;
 import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.dtos.responses.StatsResponse;
+import com.revature.p1.entities.Army;
 import com.revature.p1.entities.Stats;
 import com.revature.p1.entities.User;
 import com.revature.p1.services.JwtTokenService;
@@ -33,7 +34,15 @@ public class StatsController {
      * @param sreq header for token authentication
      * @return response for the updated scoreboard
      */
-    @PutMapping("/{username}")
+    @GetMapping("/{username}")
+    public ResponseEntity<?> getStats(@PathVariable String username) {
+        Optional<Stats> foundUser = statsService.findByName(username);
+        return ResponseEntity.status(HttpStatus.OK).body(foundUser);
+    }
+
+
+
+    @PutMapping("update/{username}")
     public ResponseEntity<?> findByUsername(@RequestBody UpdateScoreRequest req, HttpServletRequest sreq) {
 
         // validate the token request

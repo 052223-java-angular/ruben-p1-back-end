@@ -26,7 +26,7 @@ public class SoldierController {
      * @return list of soldiers tied to that army id
      */
     @GetMapping("/{army_id}")
-    public ResponseEntity<?> findByArmy(@RequestBody FindSoldierArmyIdRequest req){
+    public ResponseEntity<?> findByArmy(@PathVariable FindSoldierArmyIdRequest req){
         List<ArmyCreature> userSoldiers = soldierService.findByArmy_id(req.getArmy_id());
         System.out.println("SOLDIER GET ALL hit");
         return ResponseEntity.status(HttpStatus.OK).body(userSoldiers);

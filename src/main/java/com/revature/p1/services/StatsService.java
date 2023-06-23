@@ -37,7 +37,19 @@ public class StatsService {
      * @return stat board of user
      */
     public Optional<Stats> findById(String id) {
+        System.out.println(id);
         Optional<Stats> userOpt = statsRepo.findById(id);
+        System.out.println("finding by ID statistics");
+        if (userOpt.isEmpty()) {
+            throw new ResourceConflictException("User not found");
+        }
+        return userOpt;
+    }
+
+    public Optional<Stats> findByName(String username) {
+        System.out.println(username);
+        Optional<Stats> userOpt = statsRepo.findByUsername(username);
+        System.out.println("finding by ID statistics");
         if (userOpt.isEmpty()) {
             throw new ResourceConflictException("User not found");
         }

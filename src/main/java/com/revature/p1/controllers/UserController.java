@@ -3,8 +3,12 @@ package com.revature.p1.controllers;
 import com.revature.p1.dtos.requests.FindUserByIdRq;
 import com.revature.p1.dtos.requests.FindUserRequest;
 import com.revature.p1.dtos.responses.UserInfoRequest;
+import com.revature.p1.entities.Army;
 import com.revature.p1.entities.Creature;
+import com.revature.p1.entities.Stats;
 import com.revature.p1.entities.User;
+import com.revature.p1.services.ArmyService;
+import com.revature.p1.services.StatsService;
 import com.revature.p1.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +27,8 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
+    private final StatsService statsService;
+    private final ArmyService armyService;
 
     /**
      * Finds all users that exist on the database
@@ -38,14 +44,24 @@ public class UserController {
 
     /**
      * Finds and returns User entitity
-     * @param req username to query
+     * @param username username to query
      * @return user found
      */
 
     @GetMapping("/{username}")
-    public ResponseEntity<?> findByUsername(@RequestBody FindUserRequest req) {
-        Optional<User> foundUser = userService.findByUsername(req);
-        return ResponseEntity.status(HttpStatus.OK).body(foundUser);
+    @RequestMapping(value="/{username}", method = RequestMethod.GET)
+    public ResponseEntity<?> findByUsername(@PathVariable String username) {
+
+        System.out.println("Testing user retrieve: " + username);
+
+        Optional<User> foundUser = userService.findByUsername(username);
+        System.out.println("Testing user id: " + foundUser.get().getId());
+        Optional<Stats> foundStats = statsService.findByName(username);
+        Optional<Army> foundArmy = armyService.findByUsername(username);
+
+        UserInfoRequest user = new UserInfoRequest(foundUser, foundArmy.get().getId(), foundStats.get().getId());
+        System.out.println(foundUser.get());
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
 }
