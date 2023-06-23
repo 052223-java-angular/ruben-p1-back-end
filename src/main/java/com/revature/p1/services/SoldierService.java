@@ -31,8 +31,8 @@ public class SoldierService {
      */
     public ArmyCreature addToArmy(NewArmyMonsterRequest req) {
 
-        ArmyCreature newSoldier = new ArmyCreature(creatureService.findByName(req.getName()),
-                armyService.findByUsername(req.getUsername()).get());
+
+        ArmyCreature newSoldier = new ArmyCreature(req, armyService.findByUsername(req.getUsername()).get());
 
         // set the power of the creature by parsing name, switch to lower for spelling
         String name = newSoldier.getName().toLowerCase();

@@ -11,4 +11,6 @@ public interface ArmyRepo extends JpaRepository<Army, String> {
 
     // returns army by username
     Optional<Army> findByName(String name);
+
+    Optional<Army> findById(String id);
 }

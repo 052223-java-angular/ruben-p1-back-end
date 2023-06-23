@@ -17,7 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+//@CrossOrigin(origins="http://localhost:4200", exposedHeaders="Access-Control-Allow-Origin")
+@CrossOrigin
 @AllArgsConstructor
 @RestController
 @RequestMapping("/monsters")
@@ -88,10 +91,10 @@ public class CreatureController {
     @PostMapping("/{name}/add")
     public ResponseEntity<ArmyCreature> addToArmy(@RequestBody NewArmyMonsterRequest req, HttpServletRequest sreq) {
         // validate the token request
-        String token = sreq.getHeader("auth-token");
-        Principal principal = userService.findById(req.getUser_id());
-        jwtTokenService.validateToken(token, principal);
-
+        //String token = sreq.getHeader("auth-token");
+        //Principal principal = userService.findById(req.getUser_id());
+        //jwtTokenService.validateToken(token, principal);
+        System.out.println(req.getUsername());
         // check if username to make sure actual user exists to add to their army
         if (userService.isUniqueUsername(req.getUsername())) {
             throw new UserNotFoundException("User not found");

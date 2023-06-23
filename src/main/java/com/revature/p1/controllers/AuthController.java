@@ -15,13 +15,15 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 // forefront when hitting the endpoint
-@CrossOrigin(origins="http://localhost:4200", exposedHeaders="Access-Control-Allow-Origin")
+//@CrossOrigin(origins="http://localhost:4200", exposedHeaders="Access-Control-Allow-Origin")
+@CrossOrigin
 @AllArgsConstructor
 @RestController
 @RequestMapping("/auth") // first path --> sub paths

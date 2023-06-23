@@ -1,5 +1,6 @@
 package com.revature.p1.services;
 
+import com.revature.p1.dtos.requests.FindUserByIdRq;
 import com.revature.p1.dtos.requests.FindUserRequest;
 import com.revature.p1.dtos.requests.NewLoginRequest;
 import com.revature.p1.dtos.requests.NewUserRequest;
@@ -60,6 +61,16 @@ public class UserService {
             throw new ResourceConflictException("User notn found");
         }
         return new Principal(userOpt.get());
+    }
+
+    public Optional<User> findById(FindUserByIdRq req) {
+        Optional<User> userOpt = userRepo.findByUsername(req.getUser_id());
+
+        if (userOpt.isPresent()) {
+            User foundUser = userOpt.get();
+            return Optional.of(foundUser);
+        }
+        throw new UserNotFoundException("User was not found");
     }
 
     /**
