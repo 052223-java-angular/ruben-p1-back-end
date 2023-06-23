@@ -1,17 +1,15 @@
 package com.revature.p1.controllers;
 
-import com.revature.p1.dtos.requests.FindUserByIdRq;
-import com.revature.p1.dtos.requests.FindUserRequest;
 import com.revature.p1.dtos.responses.UserInfoRequest;
 import com.revature.p1.entities.Army;
-import com.revature.p1.entities.Creature;
+
 import com.revature.p1.entities.Stats;
 import com.revature.p1.entities.User;
 import com.revature.p1.services.ArmyService;
 import com.revature.p1.services.StatsService;
 import com.revature.p1.services.UserService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
