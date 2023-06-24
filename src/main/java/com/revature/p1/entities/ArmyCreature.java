@@ -36,6 +36,7 @@ public class ArmyCreature{
 
     private String image;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne
