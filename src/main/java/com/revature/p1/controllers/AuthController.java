@@ -56,9 +56,7 @@ public class AuthController {
             throw new ResourceConflictException("Passwords do not match");
         }
 
-        System.out.println("Register user confirmation");
         userService.registerUser(req);
-        System.out.println(req.getUsername());
         armyService.saveArmy(req.getUsername());
         statsService.saveStats(req.getUsername());
 
