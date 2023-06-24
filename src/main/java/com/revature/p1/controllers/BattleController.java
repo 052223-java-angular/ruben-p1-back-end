@@ -37,7 +37,7 @@ public class BattleController {
      * @param req player1, player 2, session id
      * @return status for success or fail
      */
-    @GetMapping("/create")
+    @GetMapping("/{player}")
     public ResponseEntity<?> createBattle(@RequestBody NewBattleRequest req, HttpServletRequest sreq) {
         // validate the token request
         String token = sreq.getHeader("auth-token");

@@ -2,20 +2,23 @@ package com.revature.p1.controllers;
 
 import com.revature.p1.dtos.requests.DeleteSoldierRequest;
 
+import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.dtos.responses.UserInfoRequest;
 import com.revature.p1.entities.Army;
 
 import com.revature.p1.entities.ArmyCreature;
 import com.revature.p1.entities.Stats;
 import com.revature.p1.entities.User;
+import com.revature.p1.services.JwtTokenService;
 import com.revature.p1.services.SoldierService;
+import com.revature.p1.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 
-
-
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -29,6 +32,8 @@ import java.util.Optional;
 @RequestMapping("/soldier")
 public class SoldierController {
     private final SoldierService soldierService;
+    private final UserService userService;
+    private final JwtTokenService jwtTokenService;
 
     /**
      * Return the army by its id
@@ -62,8 +67,13 @@ public class SoldierController {
      * @param req soldier id to delete
      * @return status indicating success request or fail
      */
+    @Transactional
     @DeleteMapping("/delete/{soldier_id}")
-    public ResponseEntity<?> deleteSolider(@RequestBody DeleteSoldierRequest req) {
+    public ResponseEntity<?> deleteSolider(@RequestBody DeleteSoldierRequest req,  HttpServletRequest sreq) {
+        String token = sreq.getHeader("auth-token");
+        Principal principal = userService.findById(req.getUser_id());
+        jwtTokenService.validateToken(token, principal);
+
         soldierService.deleteSoldier(req.getSoldier_id());
         System.out.println("Delete soldier hit");
         return ResponseEntity.status(HttpStatus.OK).build();

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -77,7 +78,7 @@ public class SoldierService {
      * @param soldier_id query repo with id
      * @return nothing
      */
-    public void deleteSoldier(String soldier_id) {
+    public void deleteSoldier(UUID soldier_id) {
         Optional<ArmyCreature> soldierExists = soldierRepo.findById(soldier_id);
         // throw exception if not found
         if (soldierExists.isEmpty()) {

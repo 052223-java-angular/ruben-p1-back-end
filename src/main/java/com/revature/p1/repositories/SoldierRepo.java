@@ -7,11 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface SoldierRepo extends JpaRepository<ArmyCreature, String> {
 
-    Optional<Stats> findByName(String name);
+    Optional<ArmyCreature> findByName(String name);
+
+    Optional<ArmyCreature> findById(UUID id);
     public List<ArmyCreature> findAllByArmy_id(String army_id);
+
+    void deleteById(UUID id);
 
 }
