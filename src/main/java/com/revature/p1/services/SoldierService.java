@@ -31,31 +31,70 @@ public class SoldierService {
      * @return saves soldier to soldiers repo
      */
     public ArmyCreature addToArmy(NewArmyMonsterRequest req) {
+        //set the power for creatures
+        int power = 0;
 
 
         ArmyCreature newSoldier = new ArmyCreature(req, armyService.findByUsername(req.getUsername()).get());
 
         // set the power of the creature by parsing name, switch to lower for spelling
         String name = newSoldier.getName().toLowerCase();
-
+        // get elemental and status attributes
+        if (name.contains("ice") || name.contains("fire") || name.contains("thunder") || name.contains("electric")) {
+            power += 3;
+        }  if (name.contains("cursed") || name.contains("blue") || name.contains("stal")) {
+            power += 4;
+        }  if (name.contains("black") || name.contains("treasure") || name.contains("stal")) {
+            power += 6;
+        }  if (name.contains("blight") || name.contains("rare") || name.contains("stal")) {
+            power += 20;
+        }  if (name.contains("yiga") || name.contains("white") || name.contains("water")) {
+            power += 6;
+        }
 
         // parse and set power based on creature
         if (name.contains("guardian")) {
-            newSoldier.setPower(15);
+            newSoldier.setPower(10 + power);
         } else if (name.contains("lynel")){
-            newSoldier.setPower(10);
+            newSoldier.setPower(10 + power);
         } else if (name.contains("lizal")){
-            newSoldier.setPower(5);
-        } else if (name.contains("lynel")){
-            newSoldier.setPower(10);
+            newSoldier.setPower(5 + power);
+        } else if (name.contains("hinox")){
+            newSoldier.setPower(10 + power);
         } else if (name.contains("octorok")){
-            newSoldier.setPower(3);
+            newSoldier.setPower(3 + power);
         } else if (name.contains("moblin")){
-            newSoldier.setPower(3);
-        }  else if (name.contains("wizzrobe")){
-            newSoldier.setPower(5);
+            newSoldier.setPower(3 + power);
+        }  else if (name.contains("robe")){
+            newSoldier.setPower(5 + power);
+        } else if (name.contains("moblin")){
+            newSoldier.setPower(5 + power);
+        }  else if (name.contains("dinraal")){
+            newSoldier.setPower(100 + power);
+        } else if (name.contains("bokoblin")){
+            newSoldier.setPower(3 + power);
+        }  else if (name.contains("calamity")){
+            newSoldier.setPower(40 + power);
+        } else if (name.contains("dark beast")){
+            newSoldier.setPower(40 + power);
+        } else if (name.contains("farosh")){
+            newSoldier.setPower(100 + power);
+        } else if (name.contains("talus")){
+            newSoldier.setPower(25 + power);
+        }  else if (name.contains("pebblit")){
+            newSoldier.setPower(5 + power);
+        } else if (name.contains("scout")){
+            newSoldier.setPower(10 + power);
+        }  else if (name.contains("molduga")){
+            newSoldier.setPower(40 + power);
+        } else if (name.contains("moldkung")){
+            newSoldier.setPower(65 + power);
+        }  else if (name.contains("naydra")){
+            newSoldier.setPower(100 + power);
+        } else if (name.contains("blademaster")){
+            newSoldier.setPower(10 + power);
         } else {
-            newSoldier.setPower(1);
+            newSoldier.setPower(2 + power);
         }
 
 

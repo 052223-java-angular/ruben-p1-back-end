@@ -70,12 +70,13 @@ public class SoldierController {
     @Transactional
     @DeleteMapping("/delete/{soldier_id}")
     public ResponseEntity<?> deleteSolider(@RequestBody DeleteSoldierRequest req,  HttpServletRequest sreq) {
+        System.out.println("Delete soldier hit");
         String token = sreq.getHeader("auth-token");
         Principal principal = userService.findById(req.getUser_id());
         jwtTokenService.validateToken(token, principal);
 
         soldierService.deleteSoldier(req.getSoldier_id());
-        System.out.println("Delete soldier hit");
+
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
