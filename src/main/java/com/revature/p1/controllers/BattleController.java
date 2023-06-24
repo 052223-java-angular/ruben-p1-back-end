@@ -58,35 +58,52 @@ public class BattleController {
         }
 
         // define the player power level
-        int power1 = p1.get().getPower() ;
-        int power2 = p2.get().getPower();
+        int power1 = 1000; //p1.get().getPower() ;
+        int power2 = 1000; //p2.get().getPower();
 
         // get list of soldiers in player armies
         List<ArmyCreature> pOneArmy = soldierService.findByArmy_id(p1.get().getId());
         List<ArmyCreature> pTwoArmy = soldierService.findByArmy_id(p2.get().getId());
 
-        // over power conditions: larger armies || power difference
-        // OR large delta in powers
-        if (pOneArmy.size() > pTwoArmy.size()) {
-            System.out.println("Army size differences");
+        if (pOneArmy.isEmpty() || pTwoArmy.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Army is empty");
         }
 
+        //get length of armies
+        int blueSize = pOneArmy.size();
+        int redSize = pTwoArmy.size();
+        int max = 0;
+
+        // set limit to shortest army
+        if (blueSize > redSize) {
+            max = redSize;
+        } else {
+            max = blueSize;
+        }
+
+        //create "soldiers"
         int blueSoldier = 0;
         int redSoldier = 0;
 
         // iterate through and "battle"
-        while(!over) {
+        while(count < max ) {
             // if either army is out of soldiers
             if (pOneArmy.get(count) == null || pTwoArmy.get(count) == null ) {
                 over = true;
                 break;
             }
-
             // if either player has reached 0 health
             if ((power1 <= 0) || (power2 <= 0)) {
                 over = true;
                 break;
             }
+
+            System.out.println("Round: " + count + "l| p1: ["+power1+"] | p2: ["+power2+"]");
+            System.out.println(pOneArmy.get(count).getName());
+            System.out.println(pTwoArmy.get(count).getName());
+            System.out.println("------------------------------------------------------------");
+
+
             // obtain powers from next soldiers
 
             // add condition to check if get is NULL, then list is empty and other player wins
@@ -110,10 +127,13 @@ public class BattleController {
             statsService.updateStats(1, 0, req.getPlayer_1()); // player 1 wins
             statsService.updateStats(0, 1, req.getPlayer_2()); // player 2 loss
             outcome = new BattleOutcomeResponse(req.getPlayer_1(), req.getPlayer_2());
-        } else {
+        } else if (power2 > power1){
             statsService.updateStats(1, 0, req.getPlayer_2()); // player 2 win
             statsService.updateStats(0,1,req.getPlayer_1()); // player 1 loss
             outcome = new BattleOutcomeResponse(req.getPlayer_2(), req.getPlayer_1());
+        } else {
+            //draw
+            outcome = new BattleOutcomeResponse("Draw", "Draw");
         }
 
         // output win/loss
