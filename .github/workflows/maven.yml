@@ -1,0 +1,58 @@
+# This is the name of your workflow, it will appear this way in the Actions tab of your GitHub repository
+name: CI/CD
+
+# Defines when the workflow will run
+on:
+  # The workflow will run every time a push is made to the main branch
+  push:
+    branches: [ main ] 
+
+# A workflow run is made up of one or more jobs
+jobs:
+  # This is the name of your job, you can name it anything you like
+  build_and_deploy:
+    # Specifies the type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE so your job can access it
+    - uses: actions/checkout@v3
+
+    # This will set up Java JDK environment for the build
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'adopt'
+    
+    # Write the application.properties to the resources dir
+    - name: Create application.properties
+      run: |
+        echo "${{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.properties
+
+    # This will build your Maven project
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+
+    # This will deploy your application to AWS Elastic Beanstalk
+    - name: Deploy to AWS Elastic Beanstalk
+      uses: einaregilsson/beanstalk-deploy@v21
+      with:
+        # These are your AWS credentials which are stored as secrets in your repository
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        # The name of your Elastic Beanstalk application
+        application_name: p1
+        # The name of your Elastic Beanstalk environment
+        environment_name: Hyrule-p1-env
+        # A unique version label for the deployment
+        version_label: version-${{github.run_number}}
+        # The AWS region your Elastic Beanstalk application is hosted in
+        region: us-east-1
+        # The jar file that will be deployed to Elastic Beanstalk
+        deployment_package: target/yolp-0.0.1-SNAPSHOT.jar
+        # This means the action will wait until the deployment is complete before it finishes
+        wait_for_deployment: true
+        # This means the action will not wait for the environment to recover after a deployment
+        wait_for_recovery: false
