@@ -43,7 +43,7 @@ jobs:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         # The name of your Elastic Beanstalk application
-        application_name: p1
+        application_name: hyrule-p1
         # The name of your Elastic Beanstalk environment
         environment_name: Hyrule-p1-env
         # A unique version label for the deployment
