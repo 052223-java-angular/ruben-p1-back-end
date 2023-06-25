@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,21 +15,26 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "armies")
+public class Army {
     @Id
     private String id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private Set<User> users;
+    private int power;
 
-    public Role(String name) {
+    @OneToMany(mappedBy = "army", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<ArmyCreature> armies;
+
+    public Army(String username) {
         this.id = UUID.randomUUID().toString();
-        this.name = name;
-        this.users = new HashSet<>();
+        this.name = username;
+        this.power = 0;
     }
+
+
+
 }

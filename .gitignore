@@ -1,0 +1,31 @@
+target/
+
+## idea
+.idea/
+idea/
+
+#application
+application.
+application/
+/application
+./application.log
+./application.log.
+
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
