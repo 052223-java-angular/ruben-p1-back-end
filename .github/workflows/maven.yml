@@ -51,7 +51,7 @@ jobs:
         # The AWS region your Elastic Beanstalk application is hosted in
         region: us-east-1
         # The jar file that will be deployed to Elastic Beanstalk
-        deployment_package: target/yolp-0.0.1-SNAPSHOT.jar
+        deployment_package: target/p1-0.0.1-SNAPSHOT.jar
         # This means the action will wait until the deployment is complete before it finishes
         wait_for_deployment: true
         # This means the action will not wait for the environment to recover after a deployment
