@@ -56,7 +56,6 @@
 			<version>2.4.0-b180830.0359</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>

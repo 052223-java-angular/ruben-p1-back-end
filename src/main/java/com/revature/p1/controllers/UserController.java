@@ -36,7 +36,7 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<?> findAll(){
         List<UserInfoRequest> allUsers = userService.findAll();
-        System.out.println("USER GET ALL hit");
+        System.out.println("USER GET ALL hit" + allUsers);
         return ResponseEntity.status(HttpStatus.OK).body(allUsers);
     }
 

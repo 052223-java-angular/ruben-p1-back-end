@@ -22,8 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 // forefront when hitting the endpoint
-//@CrossOrigin(origins="http://localhost:4200", exposedHeaders="Access-Control-Allow-Origin")
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:4200", exposedHeaders="Access-Control-Allow-Origin")
+//@CrossOrigin
 @AllArgsConstructor
 @RestController
 @RequestMapping("/auth") // first path --> sub paths

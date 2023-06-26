@@ -60,8 +60,6 @@ public class SoldierController {
         return ResponseEntity.status(HttpStatus.OK).body(userSoldiers);
     }
 
-
-
     /**
      * deletes soldier from the army
      * @param req soldier id to delete
@@ -72,8 +70,15 @@ public class SoldierController {
     public ResponseEntity<?> deleteSolider(@RequestBody DeleteSoldierRequest req,  HttpServletRequest sreq) {
         System.out.println("Delete soldier hit");
         String token = sreq.getHeader("auth-token");
+
+        System.out.println("user id: " + req.getUser_id());
+        System.out.println("soldier id: " + req.getSoldier_id());
+
         Principal principal = userService.findById(req.getUser_id());
+
+
         jwtTokenService.validateToken(token, principal);
+
 
         soldierService.deleteSoldier(req.getSoldier_id());
 
