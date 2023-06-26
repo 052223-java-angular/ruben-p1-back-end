@@ -18,8 +18,8 @@ import java.util.Optional;
 
 import com.revature.p1.services.UserService;
 
-//@CrossOrigin(origins="http://localhost:4200", exposedHeaders="Access-Control-Allow-Origin")
-@CrossOrigin
+@CrossOrigin(origins="http://p1bucket-hyrule.s3-website-us-west-1.amazonaws.com/", exposedHeaders="Access-Control-Allow-Origin")
+//@CrossOrigin
 @AllArgsConstructor
 @RestController
 @RequestMapping("/armies")

@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // forefront when hitting the endpoint
-@CrossOrigin(origins="http://localhost:4200", exposedHeaders="Access-Control-Allow-Origin")
+@CrossOrigin(origins="http://p1bucket-hyrule.s3-website-us-west-1.amazonaws.com/", exposedHeaders="Access-Control-Allow-Origin")
 //@CrossOrigin
 @AllArgsConstructor
 @RestController

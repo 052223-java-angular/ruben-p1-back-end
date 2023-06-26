@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-//@CrossOrigin(origins="http://localhost:4200", exposedHeaders="Access-Control-Allow-Origin")
-@CrossOrigin
+@CrossOrigin(origins="http://p1bucket-hyrule.s3-website-us-west-1.amazonaws.com/", exposedHeaders="Access-Control-Allow-Origin")
+//@CrossOrigin
 @AllArgsConstructor
 @RestController
 @RequestMapping("/role") // subpath for roles
