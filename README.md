@@ -4,6 +4,8 @@
 
 This is a full-stack web application that allows users to browse a catalog of Hyrule species to add to their own army and learn about them. This is built using HTML, CSS, Typecsript, deployed with SpringBoot and using Angular.
 
+## Deployed version: http://p1bucket-hyrule.s3-website-us-west-1.amazonaws.com/
+
 ## User Stories
 
 - **As a user**, I want to register an account so I can browse Hyrule Bestiary.
